@@ -1,6 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const List = ({movie}) => {
+const Card = ({movie}) => {
     return(
         <div className="col-md-4 mb-2">
             <div className="card">
@@ -14,4 +15,13 @@ const List = ({movie}) => {
     );
 }
 
-export default List;
+Card.propTypes = {
+    movie: PropTypes.shape({
+        Title: PropTypes.string,
+        Year: PropTypes.string,
+        Poster: PropTypes.string,
+        Type: PropTypes.string
+    }).isRequired
+};
+
+export default Card;

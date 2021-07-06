@@ -1,14 +1,16 @@
 import React, {Component, Fragment} from 'react';
 import Card from '../components/Card/card';
 
-const API = 'http://www.omdbapi.com/?i=tt3896198&apikey=5de6b078';
+const API = process.env.API;
+
 class List extends Component {
     constructor(){
         super();
         this.state = {
             data: [],
             termino: "",
-            error : ""
+            error : "",
+            loading: true
         }
     }
    async componentDidMount() {
@@ -17,7 +19,8 @@ class List extends Component {
        const resJson = await res.json();
 
        this.setState({
-           data: resJson.Search
+           data: resJson.Search,
+           loading: false
        });
    }
 
@@ -51,6 +54,15 @@ class List extends Component {
    }
 
    render(){
+        const{data,loading} = this.state;
+        if(loading){
+            return(
+                <div className="spinner-border text-info col-md-4 offset-md-4 p-4" role="status">
+                <span className="sr-only"></span>
+                </div>
+            );
+        }
+
       return(
         <Fragment>
             <div className="row">
@@ -66,8 +78,8 @@ class List extends Component {
             </div>
             <div className="row">
             {
-                this.state.data.map(movie => {
-                return <Card movie={movie}/>
+                data.map( (movie, index) => {
+                return <Card movie={movie} key={index}/>
             })
             }
         </div>
