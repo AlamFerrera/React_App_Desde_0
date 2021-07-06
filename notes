@@ -1,0 +1,5 @@
+//modulos necesarios
+npm i webpack webpack-cli @babel/core @babel/present-env @babel/preset-react babel-loader
+
+//para iniciar el servidor
+npm start
